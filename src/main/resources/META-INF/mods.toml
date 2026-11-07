@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="middleearthrapidwater"
+version="0.1.0-beta"
+displayName="Middle Earth MC - Rapid Hand Drinking"
+authors="Middle Earth MC"
+description='''Rapid right-click drinking from water source blocks, using Tough As Nails thirst. Requires TAN's built-in hand drinking to be disabled to avoid duplicate sips.'''
+
+[[dependencies.middleearthrapidwater]]
+modId="forge"
+mandatory=true
+versionRange="[47.0.0,48.0.0)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.middleearthrapidwater]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.middleearthrapidwater]]
+modId="toughasnails"
+mandatory=true
+versionRange="[9.2.0.171,)"
+ordering="AFTER"
+side="BOTH"
