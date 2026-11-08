@@ -44,7 +44,7 @@ public final class RapidDrinkAnimationNetwork {
      * Never call for a failed attempt, full thirst, or a rejected water source.
      */
     public static void sendSuccessfulSip(ServerPlayer player) {
-        CHANNEL.send(PacketDistributor.PLAYER.with(player), new PlayDrinkAnimation());
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new PlayDrinkAnimation());
     }
 
     private static void handle(PlayDrinkAnimation packet, Supplier<NetworkEvent.Context> supplier) {
