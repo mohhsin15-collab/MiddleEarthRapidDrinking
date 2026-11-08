@@ -4,7 +4,7 @@ license="MIT"
 
 [[mods]]
 modId="middleearthrapidwater"
-version="0.2.0"
+version="0.2.1"
 displayName="Middle Earth MC - Rapid Hand Drinking"
 authors="Middle Earth MC"
 description='''Rapid right-click drinking from water source blocks with Tough As Nails thirst and a first-person scoop-to-mouth animation. Disable TAN's built-in hand drinking to avoid duplicate sips.'''
