@@ -3,18 +3,20 @@ package com.middleearthmc.rapiddrinking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
+
 import java.util.function.Supplier;
 
-/** The server does not trust client-reported positions, liquids, or cooldowns. */
+/** Original empty client-to-server sip request, unchanged. */
 public final class SipPacket {
-    static void encode(SipPacket packet, FriendlyByteBuf buffer) { }
-    static SipPacket decode(FriendlyByteBuf buffer) { return new SipPacket(); }
-    static void handle(SipPacket packet, Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context ctx = supplier.get();
-        ctx.enqueueWork(() -> {
-            ServerPlayer sender = ctx.getSender();
+    public static void encode(SipPacket packet, FriendlyByteBuf buf) { }
+    public static SipPacket decode(FriendlyByteBuf buf) { return new SipPacket(); }
+
+    public static void handle(SipPacket packet, Supplier<NetworkEvent.Context> supplier) {
+        NetworkEvent.Context context = supplier.get();
+        context.enqueueWork(() -> {
+            ServerPlayer sender = context.getSender();
             if (sender != null) RapidDrinking.sip(sender);
         });
-        ctx.setPacketHandled(true);
+        context.setPacketHandled(true);
     }
 }

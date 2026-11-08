@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
 }
 
-version = '0.1.0-beta'
+version = '0.2.0'
 group = 'com.middleearthmc.rapiddrinking'
 base { archivesName = 'middleearth-rapid-drinking' }
 
@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.28'
-    // Tough As Nails Forge 1.20.1-9.2.0.171. Not bundled or redistributed.
+    // Same CurseMaven dependency as the original v0.1.0-beta build file.
     implementation fg.deobf('curse.maven:tough-as-nails-246391:5815863')
 }
 

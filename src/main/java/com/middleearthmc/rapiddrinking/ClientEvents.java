@@ -7,21 +7,23 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-/** Called for an actual use-key click, not continuously while the key is held. */
-@Mod.EventBusSubscriber(modid = RapidDrinking.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = RapidDrinking.MODID, value = Dist.CLIENT,
+        bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ClientEvents {
-    private ClientEvents() { }
+    private ClientEvents() {}
 
     @SubscribeEvent
     public static void onUse(InputEvent.InteractionKeyMappingTriggered event) {
         if (!event.isUseItem() || event.getHand() != InteractionHand.MAIN_HAND) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null || mc.screen != null) return;
-        if (!mc.player.isShiftKeyDown() || !mc.player.getMainHandItem().isEmpty()) return;
+        if (!mc.player.isCrouching() || !mc.player.getMainHandItem().isEmpty()) return;
         if (!RapidDrinking.lookingAtWater(mc.player)) return;
-        // Ownership is transferred to this addon; disable TAN's own hand drinking.
+
         event.setCanceled(true);
         RapidDrinking.NETWORK.sendToServer(new SipPacket());
-        event.setSwingHand(true); // Forge performs one swing despite cancellation.
+        // Do not request a vanilla hand swing: the verified sip packet
+        // starts our scoop animation, avoiding Punchy!'s punch animation.
+        event.setSwingHand(false);
     }
 }
